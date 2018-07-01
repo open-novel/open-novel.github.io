@@ -23,7 +23,10 @@ self.addEventListener( 'fetch', e => {
 	)
 } )
 
+self.addEventListener( 'install', e => {
+	self.skipWaiting( )
+} )
+
 self.addEventListener( 'activate', e => {
-	console.log( 'activate' )
-	self.registration.update( )
+	e.waitUntil( self.clients.claim( ) )
 } )
