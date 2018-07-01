@@ -13,17 +13,17 @@ self.addEventListener( 'fetch', e => {
 	console.log( '!!!' )
 	e.respondWith(
 		caches.match( req ).then( res => {
-			return res || fetch( req ).then( res => {
+			return fetch( req ).then( res => {
 				return caches.open( 'v1' ).then( cache => {
 					cache.put( req, res.clone( ) )
 					return res
 				})
-			})
+			}, err => res )
 		})
 	)
 } )
 
 self.addEventListener( 'activate', e => {
-	console.log( 'acti' )
+	console.log( 'activate' )
 	self.registration.update( )
 } )
