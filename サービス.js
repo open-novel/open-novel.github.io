@@ -23,7 +23,7 @@ self.addEventListener( 'fetch', e => {
 	// 	})
 	// )
 	e.respondWith(
-		fetch( req, { cache: 'no-cache' } ).then( res => {
+		fetch( req, req.mode == 'navigate' ? undefined : { cache: 'no-cache' } ).then( res => {
 			caches.open( 'v1' ).then( cache => cache.put( req, res ) )
 			return res.clone( )
 		}, err => caches.match( req ) ).catch( e => console.error( e ) || Promise.reject( e ) )

@@ -1,0 +1,31 @@
+{
+  "short_name": "ONP",
+  "name": "openノベルプレイヤー",
+  "display": "standalone",
+  "orientation": "landscape",
+  "start_url": "/Player/",
+  "background_color": "rgb(100,100,255)",
+  "theme_color": "rgb(100,100,255)",
+  "icons": [
+	  {
+		  "src": "/Player/画像/アイコン512.png",
+		  "sizes": "512x512",
+		  "type": "image/png"
+	  },
+	  {
+		  "src": "/Player/画像/アイコン333.png",
+		  "sizes": "333x333",
+		  "type": "image/png"
+	  },
+	  {
+		  "src": "/Player/画像/アイコン256.png",
+		  "sizes": "256x256",
+		  "type": "image/png"
+	  },
+	  {
+		  "src": "/Player/画像/アイコン144.png",
+		  "sizes": "144x144",
+		  "type": "image/png"
+	  }
+  ]
+}
