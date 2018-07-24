@@ -26,7 +26,7 @@ self.addEventListener( 'fetch', e => {
 		fetch( req, { cache: 'no-cache' } ).then( res => {
 			caches.open( 'v1' ).then( cache => cache.put( req, res ) )
 			return res.clone( )
-		}, err => caches.match( req ) )
+		}, err => caches.match( req ) ).catch( e => console.error( e ) || e )
 	)
 } )
 
