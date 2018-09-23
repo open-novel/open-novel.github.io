@@ -4,8 +4,19 @@
 <meta charset="UTF-8">
 <title>イメージソース</title>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<script></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="main.js"></script>
 <link rel="stylesheet" href="main.css">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-54947811-6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-54947811-6');
+</script>
 </head>
 <body>
 <header>おーぷんでエロゲ作ろうぜ</header>
@@ -13,28 +24,40 @@
 <ul class="tab">
 <li><a href="#ようこそ">ようこそ</a></li>
 <li><a href="#システム">システム</a></li>
-<li><a href="#キャラクター">キャラクター</a>キャラクター</li>
+<li><a href="#キャラクター">キャラクター</a></li>
 <li><a href="#ストーリー">ストーリー</a></li>
+<li><a href="#ギャラリー">ギャラリー</a></li>
 </ul>
 <section id="ようこそ">
 <h3></h3>
 <p>ようこそおーぷんでエロゲ作ろうぜのサイトへ。</p>
 </section>
 <section id="システム">
+<h3>システム</h3>
 <p>ウェブ上で作品インストールが可能な高機能ノベルプレイヤー</p>
+<p></p>
 </section>
 <section id="キャラクター">
 <h3>キャラクター</h3>
 <ul class="tab">
-<li v-on:click="">矢野さとる</li>
+<li v-on:click="fetchCharacter">矢野さとる</li>
 </ul>
-<div id="character-pane"></div>
+<div id="character-pane">
+<h4>名前</h4>
+<p>{{character.name}}</p>
+<h4>画像</h4>
+<ul class="icons">
+<li v-for="image in character.images">{{image}}</li>
+</ul>       
+<h4>解説</h4>
+<div v-html="character.desc"></div>
+</div>
 </section>
 <section id="ストーリー">
 <h3>ストーリー</h3>
 <p>おうぶ市</p>
 <ul class="tab">
-<li>滅亡のバレンタイン</li>
+<li v-on:click="">滅亡のバレンタイン</li>
 </ul>
 <div id="story-pane"></div>
 </section>
