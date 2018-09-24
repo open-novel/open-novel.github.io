@@ -3,8 +3,6 @@ These codes are licensed under CC0.
 http://creativecommons.org/publicdomain/zero/1.0
 */
 
-importScripts( 'https://storage.googleapis.com/workbox-cdn/releases/3.6.1/workbox-sw.js' );
-workbox.googleAnalytics.initialize( );
 
 self.addEventListener( 'fetch', e => {
 	let req = e.request
