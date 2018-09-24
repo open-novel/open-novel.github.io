@@ -3,11 +3,29 @@ header {
 	color:white;
 }
 .tabs {
-	padding:0
+	padding:0;
+	list-style: none;
 }
 .tabs > li{
-	margin:0
+	margin:0;
+	display:inline;
 }
 footer {
 	background-color: silver;
+	clear: right;
+}
+#menu {
+	float:left;
+}
+#main {
+	float:right;
+	max-width: 600px;
+}
+@media screen and (max-width: 480px) {
+#menu {
+
+}
+#main-menu {
+	display: none;
+}
 }
