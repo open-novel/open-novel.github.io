@@ -1,6 +1,13 @@
-.tab {
+header {
+	background-color: black;
+	color:white;
+}
+.tabs {
 	padding:0
 }
-.tab > li{
+.tabs > li{
 	margin:0
+}
+footer {
+	background-color: silver;
 }

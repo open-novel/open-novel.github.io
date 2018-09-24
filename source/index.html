@@ -7,6 +7,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="main.js"></script>
+<link rel="stylesheet" href="satoru.css">
 <link rel="stylesheet" href="main.css">
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-54947811-6"></script>
@@ -21,14 +22,15 @@
 <body>
 <header>おーぷんでエロゲ作ろうぜ</header>
 <main id="app">
-<ul class="tab">
-<li><a href="#ようこそ">ようこそ</a></li>
-<li><a href="#システム">システム</a></li>
-<li><a href="#キャラクター">キャラクター</a></li>
-<li><a href="#ストーリー">ストーリー</a></li>
-<li><a href="#ギャラリー">ギャラリー</a></li>
+<ul id="main-tab" class="tabs">
+<li class="active"><a href="#ようこそ"><button v-on:click="selectTab">ようこそ</button></a></li>
+<li><a href="#システム"><button v-on:click="selectTab">システム</button></a></li>
+<li><a href="#キャラクター"><button v-on:click="selectTab">キャラクター</button></a></li>
+<li><a href="#ストーリー"><button v-on:click="selectTab">ストーリー</button></a></li>
+<li><a href="#ギャラリー"><button v-on:click="selectTab">ギャラリー</button></a></li>
 </ul>
-<section id="ようこそ">
+<div class="tab-pane">
+<section id="ようこそ" class="active">
 <h3></h3>
 <p>ようこそおーぷんでエロゲ作ろうぜのサイトへ。</p>
 </section>
@@ -39,33 +41,49 @@
 </section>
 <section id="キャラクター">
 <h3>キャラクター</h3>
-<ul class="tab">
-<li v-on:click="fetchCharacter">矢野さとる</li>
+<ul class="tabs">
+<li><button v-on:click="fetchCharacter">矢野さとる</button></li>
+<li><button v-on:click="fetchCharacter">赤坂由奈</button></li>
+<li><button v-on:click="fetchCharacter">古見あかね</button></li>
+<li><button v-on:click="fetchCharacter">穂波菜海</button></li>
+<li><button v-on:click="fetchCharacter">水無瀬みなも</button></li>
+<li><button v-on:click="fetchCharacter">百軒千歳</button></li>
+<li><button v-on:click="fetchCharacter">橘涼香</button></li>
+<li><button v-on:click="fetchCharacter">泉岳寺龍基</button></li>
 </ul>
 <div id="character-pane">
+<section>
 <h4>名前</h4>
 <p>{{character.name}}</p>
+</section>
+<section>
 <h4>画像</h4>
 <ul class="icons">
-<li v-for="image in character.images">{{image}}</li>
-</ul>       
+<li v-for="image in character.images"><img v-on:click="enlarge" width="100" v-bind:src="'images/'+character.name+'/'+image"></li>
+</ul>
+</section>
+<section>
 <h4>解説</h4>
 <div v-html="character.desc"></div>
+</section>
 </div>
 </section>
 <section id="ストーリー">
 <h3>ストーリー</h3>
 <p>おうぶ市</p>
-<ul class="tab">
-<li v-on:click="">滅亡のバレンタイン</li>
+<ul class="tabs">
+<li><button v-on:click="fetchStory">滅亡のバレンタイン</button></li>
 </ul>
-<div id="story-pane"></div>
+<div id="story-pane">
+
+</div>
 </section>
+</div>
 </main>
 <footer>
 <ul>
 <li><a href="https://github.com/open-novel/open-novel.github.io/wiki">Wiki</a></li>
-<li><a href="https://twitter.com/nandaka_furari">ツイッター連絡先</a></li>
+<li><a href="https://twitter.com/nandaka_furari">暫定ツイッター連絡先</a></li>
 </ul>
 </footer>
 </body>

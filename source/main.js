@@ -11,7 +11,7 @@ window.addEventListener("load", ()=>{
 			}
 		},
 		methods: {
-			fetchCharacter: function(me,b,c) {
+			fetchCharacter: function(me) {
 				const character = me.target.innerText;
 				axios({
 					method:"GET",
@@ -38,6 +38,10 @@ window.addEventListener("load", ()=>{
 				}).then(response=>{
 					console.log(response);
 				});
+			},
+			enlarge() {
+			},
+			selectTab() {
 			},
 		},
 	});
