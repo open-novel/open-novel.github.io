@@ -1,4 +1,4 @@
-window.addEventListener("load", ()=>{
+window.addEventListener("DOMContentLoaded", ()=>{
 	const app = new Vue({
 		el:"#app",
 		data: {
@@ -8,8 +8,16 @@ window.addEventListener("load", ()=>{
 				images:[],
 				desc:null,
 			},
+			pane: {
+				ようこそ:true,
+				システム:false,
+				キャラクター:false,
+				ストーリー:false,
+				ギャラリー:false,
+			},
 			story: {
 			},
+			showMenu: false,
 		},
 		methods: {
 			fetchCharacter: function(me) {
@@ -40,7 +48,15 @@ window.addEventListener("load", ()=>{
 			},
 			enlarge() {
 			},
-			selectTab() {
+			selectTab(me) {
+				const target = me.target.innerText;
+				Object.keys(this.pane).forEach(prop => this.pane[prop] = false);
+				this.pane[target] = true;
+				this.showMenu = false;
+			},
+			toggleMenu() {
+				this.showMenu = this.showMenu ? false : true;
+				if(document.querySelector("#main-menu")) document.querySelector("#main-menu").style.display = "visible";
 			},
 		},
 	});

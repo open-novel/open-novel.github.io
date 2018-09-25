@@ -1,3 +1,7 @@
+body {
+	padding:0;
+	margin:0;
+}
 header {
 	background-color: black;
 	color:white;
@@ -10,22 +14,36 @@ header {
 	margin:0;
 	display:inline;
 }
-footer {
-	background-color: silver;
-	clear: right;
-}
-#menu {
-	float:left;
-}
-#main {
-	float:right;
-	max-width: 600px;
-}
-@media screen and (max-width: 480px) {
-#menu {
+.inline-items > li {
+	margin:0;
+	display:inline;
 
 }
-#main-menu {
-	display: none;
+.active {
+	outline:gray;
 }
+footer {
+	background-color: silver;
+	clear: both;
+}
+
+#main-menu {
+	list-style: none;
+	background-color:white;
+	padding:0;
+}
+#main-menu {
+	position:fixed;
+	top:10px;
+	left:0;
+}
+#logo {
+	margin-left:4.5em;
+}
+@media screen and (max-width: 480px) {
+	#menu {
+		position:absolute;
+		top:0;
+		left:0;
+	}
 }
