@@ -38,6 +38,7 @@
 <li><a href="#システム" v-on:click="selectTab">システム</a></li>
 <li><a href="#キャラクター" v-on:click="selectTab">キャラクター</a></li>
 <li><a href="#ストーリー" v-on:click="selectTab">ストーリー</a></li>
+<li><a href="#SS" v-on:click="selectTab">SS</a></li>
 <li><a href="#ギャラリー" v-on:click="selectTab">ギャラリー</a></li>
 </menu>
 </nav>
@@ -96,8 +97,8 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <li><button v-on:click="fetchStory">ねぇさとるくん</button></li>
 <li><button v-on:click="fetchStory">openメモリアル</button></li>
 <li><button v-on:click="fetchStory">あかね改</button></li>
-<li><button v-on:click="fetchStory"></button></li>
-</ul>
+<li><button v-on:click="fetchStory">女の子に告白</button></li>
+<li><button v-on:click="fetchStory">女の子に告白2</button></li></ul>
 <div id="story-pane">
 <section>
 <h4>名前</h4>
@@ -107,6 +108,21 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <div v-html="story.desc"></div>
 </section>
 </div>
+</section>
+<section id="SS" v-show="pane.SS">
+<h3>SS</h3>
+<ul class="inline-items">
+<li><button v-on:click="fetchSs">Flag・Combo</button></li>
+<li><button v-on:click="fetchSs">コンビニにて</button></li>
+<li><button v-on:click="fetchSs">ナイフ談義</button></li>
+<li><button v-on:click="fetchSs">夢を翔ける少女</button></li>
+<li><button v-on:click="fetchSs">応分学園部活事情</button></li>
+<li><button v-on:click="fetchSs">空に奏でる君の唄（仮）</button></li>
+<li><button v-on:click="fetchSs">紅白水の合戦</button></li>
+</ul>
+<h4>名前</h4>
+<p>{{ss.name}}</p>
+<div v-html="ss.content"></div>
 </section>
 <section id="ギャラリー" v-show="pane.ギャラリー">
 <h3>ギャラリー</h3>

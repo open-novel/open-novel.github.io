@@ -16,6 +16,15 @@ window.addEventListener("DOMContentLoaded", ()=>{
 				ギャラリー:false,
 			},
 			story: {
+				name:null,
+				characters:[],
+				summary:null,
+				desc:null
+			},
+			ss: {
+				name:null,
+				characters:[],
+				content:null
 			},
 			showMenu: false,
 		},
@@ -43,7 +52,28 @@ window.addEventListener("DOMContentLoaded", ()=>{
 					url:`story/${story}.html`,
 					responseType:"document",
 				}).then(response=>{
-					console.log(response);
+					const html = response.data;
+					app.story.desc = html.getElementById("description").innerHTML;
+					app.story.name = html.getElementsByTagName("title")[0].innerText;
+					app.story.summary = html.getElementById("description").innerHTML;
+					for(let li of html.querySelectorAll("#characters > li")) {
+						app.story.characters.push(li.innerText);
+					}
+				});
+			},
+			fetchSs(me) {
+				const ss = me.target.innerText;
+				axios({
+					method:"GET",
+					url:`short-story/${ss}.html`,
+					responseType:"document",
+				}).then(response=>{
+					const html = response.data;
+					app.ss.name = html.getElementsByTagName("title")[0].innerText;
+					app.ss.content = html.getElementById("content").innerHTML;
+					for(let li of html.querySelectorAll("#characters > li")) {
+						app.story.characters.push(li.innerText);
+					}
 				});
 			},
 			enlarge() {
@@ -56,7 +86,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
 			},
 			toggleMenu() {
 				this.showMenu = this.showMenu ? false : true;
-				if(document.querySelector("#main-menu")) document.querySelector("#main-menu").style.display = "visible";
+				if(document.querySelector("#main-menu")) document.querySelector("#main-menu").style.display = "block";
 			},
 		},
 	});
