@@ -1,0 +1,143 @@
+<!DOCTPYE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>おーぷんでエロゲ作ろうぜ</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta property="og:type" content="website">
+<meta property="og:title" content="おーぷんでエロゲ作ろぜTOP">
+<meta property="og:image" content="https://open-novel.github.io/Player/画像/サムネイル.png">
+<meta property="og:description" content="オープンソースなエロゲを作るプロジェクトです。">
+<meta name="twitter:card" content="summary_large_image">
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="main.js"></script>
+<link rel="stylesheet" href="satoru.css">
+<!–-[if lt IE 9]>
+
+<![endif]-–>
+<link rel="stylesheet" href="main.css">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-54947811-6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-54947811-6');
+</script>
+</head>
+<body>
+<div id="app">
+<header>
+<div id="menu">
+<button v-on:click="toggleMenu">メニュー</button>
+<nav>
+<menu type="toolbar" id="main-menu" v-if="showMenu">
+<li class="active"><a href="#ようこそ" v-on:click="selectTab">ようこそ</a></li>
+<li><a href="#システム" v-on:click="selectTab">システム</a></li>
+<li><a href="#キャラクター" v-on:click="selectTab">キャラクター</a></li>
+<li><a href="#ストーリー" v-on:click="selectTab">ストーリー</a></li>
+<li><a href="#SS" v-on:click="selectTab">SS</a></li>
+<li><a href="#ギャラリー" v-on:click="selectTab">ギャラリー</a></li>
+</menu>
+</nav>
+</div>
+<div id="logo">おーぷんでエロゲ作ろうぜ</div>
+</header>
+<main>
+<div id="main" class="tab-pane">
+<section id="ようこそ" class="pane active" v-show="pane.ようこそ">
+<h1>ようこそおーぷんでエロゲ作ろうぜのサイトへ</h1>
+<p>「おーぷんでエロゲ作ろうぜ」はおーぷん2ちゃんねるのVIP板のスレッドで進行しているオープンソースのAVG開発プロジェクトです。</p>
+<p>このプロジェクトはそのスレッドを中心にGitHub上で開発が行われています。プロジェクトの開発の柱はプレイヤー、サイト、Wikiです。</p>
+<p>おーぷん2ちゃんねるで、パブリックドメインのアドベンチャーゲームを作ろうという企画から始まったプロジェクトです。 2013年に5月に企画がはじまりました。<br>
+SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハッシュタグでお願いします。例えばツイッターの場合です。</p>
+</section>
+<section id="システム" class="pane" v-show="pane.システム">
+<h3>システム</h3>
+<p>ウェブ上で作品インストールが可能な高機能ノベルプレイヤー</p>
+<p>クリック一つでウェブ上の作品をインストールできるお手軽ノベルプレイヤー</p>
+<p>SVG対応でアニメーションも可能</p>
+</section>
+<section id="キャラクター" class="pane" v-show="pane.キャラクター">
+<h3>キャラクター</h3>
+<ul class="inline-items">
+<li><button v-on:click="fetchCharacter">矢野さとる</button></li>
+<li><button v-on:click="fetchCharacter">赤坂由奈</button></li>
+<li><button v-on:click="fetchCharacter">古見あかね</button></li>
+<li><button v-on:click="fetchCharacter">穂波菜海</button></li>
+<li><button v-on:click="fetchCharacter">水無瀬みなも</button></li>
+<li><button v-on:click="fetchCharacter">百軒千歳</button></li>
+<li><button v-on:click="fetchCharacter">橘涼香</button></li>
+<li><button v-on:click="fetchCharacter">泉岳寺龍基</button></li>
+</ul>
+<div id="character-pane">
+<section>
+<h4>名前</h4>
+<p>{{character.name}}</p>
+</section>
+<section>
+<h4>画像</h4>
+<ul class="inline-items">
+<li v-for="image in character.images"><img v-on:click="enlarge" width="100" v-bind:src="'images/人物/'+character.name+'/'+image"></li>
+</ul>
+</section>
+<section>
+<h4>解説</h4>
+<div v-html="character.desc"></div>
+</section>
+</div>
+</section>
+<section id="ストーリー" v-show="pane.ストーリー">
+<h3>ストーリー</h3>
+<p>おうぶ市</p>
+<ul class="inline-items">
+<li><button v-on:click="fetchStory">滅亡のバレンタイン</button></li>
+<li><button v-on:click="fetchStory">ねぇさとるくん</button></li>
+<li><button v-on:click="fetchStory">openメモリアル</button></li>
+<li><button v-on:click="fetchStory">あかね改</button></li>
+<li><button v-on:click="fetchStory">女の子に告白</button></li>
+<li><button v-on:click="fetchStory">女の子に告白2</button></li></ul>
+<div id="story-pane">
+<section>
+<h4>名前</h4>
+<p id="story-title">{{story.name}}</p>
+</section>
+<section>
+<div v-html="story.desc"></div>
+</section>
+</div>
+</section>
+<section id="SS" v-show="pane.SS">
+<h3>SS</h3>
+<ul class="inline-items">
+<li><button v-on:click="fetchSs">Flag・Combo</button></li>
+<li><button v-on:click="fetchSs">コンビニにて</button></li>
+<li><button v-on:click="fetchSs">ナイフ談義</button></li>
+<li><button v-on:click="fetchSs">夢を翔ける少女</button></li>
+<li><button v-on:click="fetchSs">応分学園部活事情</button></li>
+<li><button v-on:click="fetchSs">空に奏でる君の唄（仮）</button></li>
+<li><button v-on:click="fetchSs">紅白水の合戦</button></li>
+</ul>
+<h4>名前</h4>
+<p>{{ss.name}}</p>
+<div v-html="ss.content"></div>
+</section>
+<section id="ギャラリー" v-show="pane.ギャラリー">
+<h3>ギャラリー</h3>
+<ul class="inline-items">
+<li><img src="images/ギャラリー/ヒロイン全身図.jpg" width="200" alt="メインヒロインたち"></li>
+</ul>
+</section>
+</main>
+</div>
+<footer>
+<ul>
+<li><a href="https://github.com/open-novel/open-novel.github.io">GitHub</a></li>
+<li><a href="https://github.com/open-novel/open-novel.github.io/wiki">Wiki</a></li>
+<li><a href="https://twitter.com/nandaka_furari">暫定ツイッター連絡先</a></li>
+</ul>
+</footer>
+</body>
+</html>
