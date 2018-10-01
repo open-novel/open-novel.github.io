@@ -76,7 +76,32 @@ window.addEventListener("DOMContentLoaded", ()=>{
 					}
 				});
 			},
-			enlarge() {
+			enlarge(me) {
+				const target = me.target;
+				axios({
+					method:"GET",
+					url:"image.html",
+					responseType:"document",
+				}).then(response=>{
+					const html = response.data;
+					const panel = html.getElementById("image-panel");
+					panel.style.position = "absolute";
+					const top = me.pageY - target.naturalHeight/2 > 0 ? me.pageY - target.naturalHeight/2 : 0;
+					panel.style.top = top + "px";
+					panel.style.left = 0;
+					panel.style.width = "100%";
+					panel.style.zIndex = 30;
+					const image = panel.querySelector("#image");
+					const img = document.createElement("img");
+					img.setAttribute("src", target.getAttribute("src"));
+					const width = window.innerWidth > img.naturalWidth ? img.naturalWidth : window.innerWidth;
+					img.setAttribute("width", width);
+					image.appendChild(img);
+					html.getElementById("close-button").addEventListener("click",(event)=>{
+						document.body.removeChild(panel);
+					});
+					document.body.appendChild(panel);
+				});
 			},
 			selectTab(me) {
 				const target = me.target.innerText;

@@ -26,7 +26,10 @@ footer {
 	background-color: silver;
 	clear: both;
 }
-
+#image-panel {
+	background-color: black;
+	text-align: center;
+}
 #main-menu {
 	list-style: none;
 	background-color:white;
