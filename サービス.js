@@ -11,8 +11,8 @@ self.addEventListener( 'fetch', e => {
 
 	let get = fetch( req, req.mode == 'navigate' ? undefined : { cache: 'no-cache' } )
 		.then( res => {
-			cache.put( req, res )
-			return res.clone( )
+			cache.put( req, res.clone( ) )
+			return res
 		} )
 
 	if ( req.destination == 'document' ) {
