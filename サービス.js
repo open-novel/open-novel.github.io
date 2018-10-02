@@ -26,9 +26,11 @@ self.addEventListener( 'fetch', e => {
 		}
 
 	} catch ( err ) {
+
 		self.registration.update( )
 		console.error( err )
 		e.respondWith(  req )
+		
 	}
 
 } )
