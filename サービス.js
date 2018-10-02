@@ -7,9 +7,10 @@ let cache
 
 self.addEventListener( 'fetch', e => {
 
+	let req = e.request
+
 	try {
 
-		let req = e.request
 		let dest = req.mode == 'navigate' ? 'document' : req.destination
 
 		let network = fetch( req, req.mode == 'navigate' ? undefined : { cache: 'no-cache' } )
@@ -27,6 +28,7 @@ self.addEventListener( 'fetch', e => {
 	} catch ( err ) {
 		self.registration.update( )
 		console.error( err )
+		e.respondWith(  req )
 	}
 
 } )
