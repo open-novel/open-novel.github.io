@@ -3,38 +3,30 @@ These codes are licensed under CC0.
 http://creativecommons.org/publicdomain/zero/1.0
 */
 
+let cache
 
 self.addEventListener( 'fetch', e => {
+
 	let req = e.request
 
-	// let path = new URL( req.url ).pathname
-	// if ( path != '/index.html' && path != '/' ) {
-	// 	 e.respondWith( fetch( req ) )
-	// 	return
-	// }
-	// console.log( '!!!' )
-	// e.respondWith(
-	// 	caches.match( req ).then( res => {
-	// 		return fetch( req ).then( res => {
-	// 			return caches.open( 'v1' ).then( cache => {
-	// 				cache.put( req, res.clone( ) )
-	// 				return res
-	// 			})
-	// 		}, err => res )
-	// 	})
-	// )
-	e.respondWith(
-		fetch( req, req.mode == 'navigate' ? undefined : { cache: 'no-cache' } ).then( res => {
-			caches.open( 'v1' ).then( cache => cache.put( req, res ) )
-			return res.clone( )
-		}, err => caches.match( req ) ).catch( e => console.error( e ) || Promise.reject( e ) )
-	)
+	let get = fetch( req, req.mode == 'navigate' ? undefined : { cache: 'no-cache' } )
+		.then( res => cache.put( req, res ) )
+
+	if ( req.destination == 'document' ) {
+		e.respondWith( cache.match( req ).then( v => v || get ) )
+	} else {
+		e.respondWith( get.then( cache.match( req ) ) )
+	}
+
 } )
 
-self.addEventListener( 'install', e => {
-	self.skipWaiting( )
-} )
+
+self.addEventListener( 'install', ( ) => self.skipWaiting( ) )
+
 
 self.addEventListener( 'activate', e => {
-	e.waitUntil( self.clients.claim( ) )
+	e.waitUntil( Promise.all( [
+		self.clients.claim( ),
+		caches.open( 'v1' ).then( c => { cache = c } ) 
+	] ) )
 } )
