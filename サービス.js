@@ -9,8 +9,6 @@ self.addEventListener( 'fetch', e => {
 
 	let req = e.request
 
-	console.table( e.request )
-
 	try {
 
 		let network = fetch( req, req.mode == 'navigate' ? undefined : { cache: 'no-cache' } )
@@ -19,7 +17,7 @@ self.addEventListener( 'fetch', e => {
 				return res
 			} )
 
-		let list = [ 'serviceworker' ]
+		let list = [ 'manifest', 'document', 'style', 'script', 'worker', 'serviceworker' ]
 
 		if ( req.mode == 'navigate' || list.includes( req.destination ) ) {
 			e.respondWith( network.catch( ( ) => cache.match( req ) ) )
