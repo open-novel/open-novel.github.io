@@ -8,6 +8,7 @@ let cache
 self.addEventListener( 'fetch', e => {
 
 	let req = e.request
+	let dest = req.mode == 'navigate' ? 'document' : req.destination
 
 	let get = fetch( req, req.mode == 'navigate' ? undefined : { cache: 'no-cache' } )
 		.then( res => {
@@ -15,10 +16,10 @@ self.addEventListener( 'fetch', e => {
 			return res
 		} )
 
-	if ( req.destination == 'document' ) {
+	if ( dest != 'document' ) {
 		e.respondWith( cache.match( req ).then( v => v || get ) )
 	} else {
-		e.respondWith( get.catch( cache.match( req ) ) )
+		e.respondWith( get.catch( ( ) => cache.match( req ) ) )
 	}
 
 } )
