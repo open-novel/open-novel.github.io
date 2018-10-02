@@ -10,12 +10,15 @@ self.addEventListener( 'fetch', e => {
 	let req = e.request
 
 	let get = fetch( req, req.mode == 'navigate' ? undefined : { cache: 'no-cache' } )
-		.then( res => cache.put( req, res ) )
+		.then( res => {
+			cache.put( req, res )
+			return res.clone( )
+		} )
 
 	if ( req.destination == 'document' ) {
 		e.respondWith( cache.match( req ).then( v => v || get ) )
 	} else {
-		e.respondWith( get.then( cache.match( req ) ) )
+		e.respondWith( get.catch( cache.match( req ) ) )
 	}
 
 } )
