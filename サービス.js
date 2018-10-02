@@ -9,7 +9,7 @@ self.addEventListener( 'fetch', e => {
 
 	let req = e.request
 
-	console.log( e.request )
+	console.table( e.request )
 
 	try {
 
