@@ -70,6 +70,9 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <li><button v-on:click="fetchCharacter">水無瀬みなも</button></li>
 <li><button v-on:click="fetchCharacter">百軒千歳</button></li>
 <li><button v-on:click="fetchCharacter">橘涼香</button></li>
+<li><button v-on:click="fetchCharacter">おーちゃん</button></li>
+<li><button v-on:click="fetchCharacter">幽霊</button></li>
+<li><button v-on:click="fetchCharacter">巫女</button></li>
 <li><button v-on:click="fetchCharacter">泉岳寺龍基</button></li>
 </ul>
 <div id="character-pane">
@@ -78,14 +81,14 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <p>{{character.name}}</p>
 </section>
 <section>
+<h4>解説</h4>
+<div v-html="character.desc"></div>
 <h4>画像</h4>
 <ul class="inline-items">
 <li v-for="image in character.images"><img v-on:click="enlarge" width="100" v-bind:src="'images/人物/'+character.name+'/'+image"></li>
 </ul>
 </section>
 <section>
-<h4>解説</h4>
-<div v-html="character.desc"></div>
 </section>
 </div>
 </section>
@@ -98,8 +101,8 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <li><button v-on:click="fetchStory">openメモリアル</button></li>
 <li><button v-on:click="fetchStory">あかね改</button></li>
 <li><button v-on:click="fetchStory">女の子に告白</button></li>
-<li><button v-on:click="fetchStory">女の子に告白2</button></li></ul>
-<div id="story-pane">
+<li><button v-on:click="fetchStory">女の子に告白2</button></li>
+</ul>
 <section>
 <h4>名前</h4>
 <p id="story-title">{{story.name}}</p>
@@ -107,7 +110,6 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <section>
 <div v-html="story.desc"></div>
 </section>
-</div>
 </section>
 <section id="SS" v-show="pane.SS">
 <h3>SS</h3>
