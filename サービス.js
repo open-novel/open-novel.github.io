@@ -10,16 +10,16 @@ self.addEventListener( 'fetch', e => {
 	let req = e.request
 	let dest = req.mode == 'navigate' ? 'document' : req.destination
 
-	let get = fetch( req, req.mode == 'navigate' ? undefined : { cache: 'no-cache' } )
+	let network = fetch( req, req.mode == 'navigate' ? undefined : { cache: 'no-cache' } )
 		.then( res => {
 			cache.put( req, res.clone( ) )
 			return res
 		} )
 
-	if ( dest != 'document' ) {
-		e.respondWith( cache.match( req ).then( v => v || get ) )
+	if ( dest == 'document' ) {
+		e.respondWith( network.catch( ( ) => cache.match( req ) ) )
 	} else {
-		e.respondWith( get.catch( ( ) => cache.match( req ) ) )
+		e.respondWith( cache.match( req ).then( v => v || network ) )
 	}
 
 } )
