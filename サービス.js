@@ -9,9 +9,9 @@ self.addEventListener( 'fetch', e => {
 
 	let req = e.request
 
-	try {
+	console.log( e )
 
-		let dest = req.mode == 'navigate' ? 'document' : req.destination
+	try {
 
 		let network = fetch( req, req.mode == 'navigate' ? undefined : { cache: 'no-cache' } )
 			.then( res => {
@@ -19,18 +19,20 @@ self.addEventListener( 'fetch', e => {
 				return res
 			} )
 
-		if ( [ 'image', 'audio', 'video' ].includes( dest ) ) {	
-			e.respondWith( cache.match( req ).then( v => v || network ) )
-		} else {
+		let list = [ 'document', 'serviceworker' ]
+
+		if ( req.mode == 'navigate' || list.includes( req.destination ) ) {
 			e.respondWith( network.catch( ( ) => cache.match( req ) ) )
+		} else {
+			e.respondWith( cache.match( req ).then( v => v || network ) )
 		}
 
 	} catch ( err ) {
 
 		self.registration.update( )
 		console.error( err )
-		e.respondWith(  req )
-		
+		e.respondWith( req )
+
 	}
 
 } )
