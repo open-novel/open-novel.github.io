@@ -40,8 +40,10 @@ self.addEventListener( 'install', ( ) => self.skipWaiting( ) )
 
 
 self.addEventListener( 'activate', e => {
-	e.waitUntil( Promise.all( [
-		self.clients.claim( ),
-		caches.open( 'v1' ).then( c => { cache = c } ) 
-	] ) )
+	e.waitUntil(
+		caches.open( 'v1' ).then( c => {
+			cache = c
+			return self.clients.claim( )
+		} ) 
+	)
 } )
