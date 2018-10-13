@@ -12,8 +12,8 @@ self.addEventListener( 'fetch', e => {
 
 		let network = fetch( req, req.mode == 'navigate' ? undefined : { cache: 'no-cache' } )
 			.then( res => {
-				caches.open('v1').then( cache => cache.put( req, res.clone( ) ) )
-				return res
+				caches.open('v1').then( cache => cache.put( req, res ) )
+				return res.clone( )
 			} )
 
 		let list = [ 'manifest', 'document', 'style', 'script', 'worker', 'serviceworker' ]
