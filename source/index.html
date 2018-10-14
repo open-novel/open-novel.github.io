@@ -12,6 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="main.js"></script>
+<script src="../Products/onp-agent.js"></script>
 <link rel="stylesheet" href="satoru.css">
 <!–-[if lt IE 9]>
 
@@ -78,7 +79,7 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <div id="character-pane">
 <section>
 <h4>名前</h4>
-<p>{{character.name}}</p>
+<p><ruby>{{character.name}}<rt>{{character.ruby}}</rt></ruby></p>
 </section>
 <section>
 <h4>解説</h4>
@@ -105,7 +106,7 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 </ul>
 <section>
 <h4>名前</h4>
-<p id="story-title">{{story.name}}</p>
+<p id="story-title">{{story.name}}<a v-if="story.path" v-bind:href="'../' + story.path" v-on:click="onp"> インストールする</a></p>
 </section>
 <section>
 <div v-html="story.desc"></div>
