@@ -3,10 +3,8 @@ These codes are licensed under CC0.
 http://creativecommons.org/publicdomain/zero/1.0
 */
 
+let channel, devCh, locCh
 
-const channel = new URL( self.scriptURL ).searchParams.get( 'ch' )
-const devCh = !! channel == 'Dev'
-const locCh = !! channel == 'Loc'
 
 self.addEventListener( 'fetch', e => {
 
@@ -45,4 +43,9 @@ self.addEventListener( 'fetch', e => {
 
 self.addEventListener( 'install', ( ) => self.skipWaiting( ) )
 
-self.addEventListener( 'activate', e => e.waitUntil( self.clients.claim( ) ) )
+self.addEventListener( 'activate', e => {
+	const channel = new URL( self.registration.active.scriptURL ).searchParams.get( 'ch' )
+	devCh = !! channel == 'Dev'
+	locCh = !! channel == 'Loc'
+	e.waitUntil( self.clients.claim( ) )
+} )
