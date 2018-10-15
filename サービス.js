@@ -3,19 +3,11 @@ These codes are licensed under CC0.
 http://creativecommons.org/publicdomain/zero/1.0
 */
 
-let channel, devCh, locCh
-
-
 self.addEventListener( 'fetch', e => {
 
 	let req = e.request
 
 	try {
-
-		if ( ( devCh || locCh ) && req.url.includes( '/Player' ) ) {
-			if ( locCh ) req = new Request( Object.assign( { }, req, { url: req.url.replace( '/Player', '' ) } ) )
-			else if ( devCh ) req = new Request( Object.assign( { }, req, { url: req.url.replace( '/Player', '/Player_Dev' ) } ) )
-		}
 
 		let network = fetch( req, req.mode == 'navigate' ? undefined : { cache: 'no-store' } )
 			.then( res => {
@@ -43,9 +35,4 @@ self.addEventListener( 'fetch', e => {
 
 self.addEventListener( 'install', ( ) => self.skipWaiting( ) )
 
-self.addEventListener( 'activate', e => {
-	const channel = new URL( self.registration.active.scriptURL ).searchParams.get( 'ch' )
-	devCh = !! channel == 'Dev'
-	locCh = !! channel == 'Loc'
-	e.waitUntil( self.clients.claim( ) )
-} )
+self.addEventListener( 'activate', e => e.waitUntil( self.clients.claim( ) ) )
