@@ -19,12 +19,13 @@ window.addEventListener("DOMContentLoaded", ()=>{
 				name:null,
 				characters:[],
 				summary:null,
-				desc:null
+				path:null,
+				desc:null,
 			},
 			ss: {
 				name:null,
 				characters:[],
-				content:null
+				content:null,
 			},
 			showMenu: false,
 		},
@@ -39,6 +40,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
 					const html = response.data;
 					app.character.desc = html.getElementById("description").innerHTML;
 					app.character.name = html.getElementsByTagName("title")[0].innerText;
+					app.character.ruby = html.getElementById("ruby").innerText;
 					app.character.images = [];
 					for(let li of html.querySelectorAll("#images > li")) {
 						app.character.images.push(li.innerText);
@@ -53,9 +55,15 @@ window.addEventListener("DOMContentLoaded", ()=>{
 					responseType:"document",
 				}).then(response=>{
 					const html = response.data;
-					app.story.desc = html.getElementById("description").innerHTML;
+					app.story.desc = html.getElementById("description") ? html.getElementById("description").innerHTML:null;
 					app.story.name = html.getElementsByTagName("title")[0].innerText;
 					app.story.summary = html.getElementById("description").innerHTML;
+					const path = html.getElementById("path");
+					if(path) {
+						app.story.path = path.innerText;
+					} else {
+						app.story.path = null;
+					}
 					for(let li of html.querySelectorAll("#characters > li")) {
 						app.story.characters.push(li.innerText);
 					}
@@ -113,6 +121,9 @@ window.addEventListener("DOMContentLoaded", ()=>{
 				this.showMenu = this.showMenu ? false : true;
 				if(document.querySelector("#main-menu")) document.querySelector("#main-menu").style.display = "block";
 			},
+			onp(e) {
+				onp(e);
+			}
 		},
 	});
 });
