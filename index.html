@@ -10,7 +10,7 @@ http://creativecommons.org/publicdomain/zero/1.0
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'UA-42847701-4');
+  if ( ! localStorage.DoNotAnalytic ) gtag('config', 'UA-42847701-4');
 </script>
 
 <meta charset="UTF-8">
