@@ -1,4 +1,5 @@
 window.addEventListener("DOMContentLoaded", ()=>{
+		
 	const app = new Vue({
 		el:"#app",
 		data: {
@@ -9,7 +10,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
 				desc:null,
 			},
 			pane: {
-				ようこそ:true,
+				ようこそ:false,
 				システム:false,
 				キャラクター:false,
 				ストーリー:false,
@@ -29,8 +30,27 @@ window.addEventListener("DOMContentLoaded", ()=>{
 			},
 			showMenu: false,
 		},
+		mounted: function(){
+			const hash = document.location.hash;
+			const paneAry = Object.keys(this.pane);
+			Object.keys(this.pane).forEach(prop => this.pane[prop] = false);
+			if(hash) {
+				const flgmnt = decodeURI(hash.slice(1));
+				const index = paneAry.findIndex(n => n === flgmnt);
+				console.log(index);
+				if(index != -1) {
+					this.pane[paneAry[index]] = true;
+				} else {
+					this.pane.ようこそ = true;
+				}
+			} else {
+				this.pane.ようこそ = true;
+			}
+			console.log(this.pane);
+			console.log(hash);
+		},
 		methods: {
-			fetchCharacter: function(me) {
+			fetchCharacter(me) {
 				const character = me.target.innerText;
 				axios({
 					method:"GET",
@@ -47,7 +67,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
 					}
 				});
 			},
-			fetchStory: function(me) {
+			fetchStory(me) {
 				const story = me.target.innerText;
 				axios({
 					method:"GET",
@@ -123,7 +143,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
 			},
 			onp(e) {
 				onp(e);
-			}
+			},
 		},
 	});
 });
