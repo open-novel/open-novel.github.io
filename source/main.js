@@ -1,5 +1,4 @@
-window.addEventListener("DOMContentLoaded", ()=>{
-		
+window.addEventListener("DOMContentLoaded", function() {
 	const app = new Vue({
 		el:"#app",
 		data: {
@@ -7,28 +6,28 @@ window.addEventListener("DOMContentLoaded", ()=>{
 				name:null,
 				ruby:null,
 				images:[],
-				desc:null,
+				desc:null
 			},
 			pane: {
 				ようこそ:false,
 				システム:false,
 				キャラクター:false,
 				ストーリー:false,
-				ギャラリー:false,
+				ギャラリー:false
 			},
 			story: {
 				name:null,
 				characters:[],
 				summary:null,
 				path:null,
-				desc:null,
+				desc:null
 			},
 			ss: {
 				name:null,
 				characters:[],
-				content:null,
+				content:null
 			},
-			showMenu: false,
+			showMenu: false
 		},
 		mounted: function(){
 			const hash = document.location.hash;
@@ -50,61 +49,68 @@ window.addEventListener("DOMContentLoaded", ()=>{
 			console.log(hash);
 		},
 		methods: {
-			fetchCharacter(me) {
-				const character = me.target.innerText;
-				axios({
-					method:"GET",
-					url:`character/${character}.html`, 
-					responseType:"document",
-				}).then(response=>{
-					const html = response.data;
-					app.character.desc = html.getElementById("description").innerHTML;
-					app.character.name = html.getElementsByTagName("title")[0].innerText;
-					app.character.ruby = html.getElementById("ruby").innerText;
-					app.character.images = [];
-					for(let li of html.querySelectorAll("#images > li")) {
-						app.character.images.push(li.innerText);
+			fetchCharacter: function(me) {
+				var character = me.target.innerText;
+				$.ajax({
+					type: 'GET',
+					url: 'character/'+character+'.html',
+					dataType: 'xml',
+					success: function(data, textStatus) {
+						var dom = $(data);
+						app.character.desc = dom.find('#description').html();
+						app.character.name = dom.find('title').text();
+						app.character.ruby = dom.find('#ruby').text();
+						app.character.images = [];
+						dom
+							.find('#images > li')
+							.each(function(i,e) {
+								app.character.images.push(e.textContent);
+							});
+					},
+					error: function(data, textStatus) {
+						console.log('error');
+						alert('error');
 					}
 				});
 			},
-			fetchStory(me) {
-				const story = me.target.innerText;
-				axios({
-					method:"GET",
-					url:`story/${story}.html`,
-					responseType:"document",
-				}).then(response=>{
-					const html = response.data;
-					app.story.desc = html.getElementById("description") ? html.getElementById("description").innerHTML:null;
-					app.story.name = html.getElementsByTagName("title")[0].innerText;
-					app.story.summary = html.getElementById("description").innerHTML;
-					const path = html.getElementById("path");
-					if(path) {
-						app.story.path = path.innerText;
-					} else {
-						app.story.path = null;
-					}
-					for(let li of html.querySelectorAll("#characters > li")) {
-						app.story.characters.push(li.innerText);
+			fetchStory: function(me) {
+				var story = me.target.innerText;
+				$.ajax({
+					type: 'GET',
+					url: 'story/'+story+'.html',
+					dataType:'xml',
+					success: function(data, textStatus) {
+						var dom = $(data);
+						app.story.desc = dom.find('#description').html();
+						app.story.name = dom.find('title').text();
+						app.story.path = dom.find('#path').text();
+						dom
+							.find('#characters > li')
+							.each(function(i,e) {
+								app.story.characters.push(e.textContent);
+							});
 					}
 				});
 			},
-			fetchSs(me) {
-				const ss = me.target.innerText;
-				axios({
-					method:"GET",
-					url:`short-story/${ss}.html`,
-					responseType:"document",
-				}).then(response=>{
-					const html = response.data;
-					app.ss.name = html.getElementsByTagName("title")[0].innerText;
-					app.ss.content = html.getElementById("content").innerHTML;
-					for(let li of html.querySelectorAll("#characters > li")) {
-						app.story.characters.push(li.innerText);
+			fetchSs: function(me) {
+				var ss = me.target.innerText;
+				$.ajax({
+					type: 'GET',
+					url: 'short-story/'+ss+'.html',
+					dataType: 'xml',
+					success: function(data, textStatus) {
+						var dom = $(data);
+						app.ss.name = dom.find('title').text();
+						app.ss.content = dom.find('#content').html();
+						dom
+							.find('#characters > li')
+							.each(function(i,e) {
+								app.story.characters.push(e.textContent);
+							});
 					}
 				});
 			},
-			enlarge(me) {
+			enlarge: function(me) {
 				const target = me.target;
 				axios({
 					method:"GET",
@@ -131,19 +137,19 @@ window.addEventListener("DOMContentLoaded", ()=>{
 					document.body.appendChild(panel);
 				});
 			},
-			selectTab(me) {
+			selectTab: function(me) {
 				const target = me.target.innerText;
 				Object.keys(this.pane).forEach(prop => this.pane[prop] = false);
 				this.pane[target] = true;
 				this.showMenu = false;
 			},
-			toggleMenu() {
+			toggleMenu: function() {
 				this.showMenu = this.showMenu ? false : true;
 				if(document.querySelector("#main-menu")) document.querySelector("#main-menu").style.display = "block";
 			},
-			onp(e) {
+			onp: function(e) {
 				onp(e);
-			},
+			}
 		},
 	});
 });
