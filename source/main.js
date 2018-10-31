@@ -1,52 +1,53 @@
-window.addEventListener("DOMContentLoaded", function() {
-	const app = new Vue({
-		el:"#app",
-		data: {
-			character: {
-				name:null,
-				ruby:null,
-				images:[],
-				desc:null
-			},
-			pane: {
-				ようこそ:false,
-				システム:false,
-				キャラクター:false,
-				ストーリー:false,
-				ギャラリー:false
-			},
-			story: {
-				name:null,
-				characters:[],
-				summary:null,
-				path:null,
-				desc:null
-			},
-			ss: {
-				name:null,
-				characters:[],
-				content:null
-			},
-			showMenu: false
+var vueData = {
+		character: {
+			name:null,
+			ruby:null,
+			images:[],
+			desc:null
 		},
+		pane: {
+			ようこそ:false,
+			システム:false,
+			キャラクター:false,
+			ストーリー:false,
+			ギャラリー:false
+		},
+		story: {
+			name:null,
+			characters:[],
+			summary:null,
+			path:null,
+			desc:null
+		},
+		ss: {
+			name:null,
+			characters:[],
+			content:null
+		},
+		showMenu: false
+}
+window.addEventListener("DOMContentLoaded", function() {
+	var  app = new Vue({
+		el:"#app",
+		data: vueData,
 		mounted: function(){
-			const hash = document.location.hash;
-			const paneAry = Object.keys(this.pane);
-			Object.keys(this.pane).forEach(prop => this.pane[prop] = false);
+			var  hash = document.location.hash;
+			var  paneAry = Object.keys(this.pane);
+			Object.keys(this.pane).forEach(function(prop) {
+				vueData.pane[prop] = false
+			});
 			if(hash) {
-				const flgmnt = decodeURI(hash.slice(1));
-				const index = paneAry.findIndex(n => n === flgmnt);
-				console.log(index);
+				var  flgmnt = decodeURI(hash.slice(1));
+				var index = -1;
+				$.each(paneAry, function(i,n) {
+					if(n === flgmnt) return n;
+				});
 				if(index != -1) {
 					this.pane[paneAry[index]] = true;
-				} else {
-					this.pane.ようこそ = true;
+					return;
 				}
-			} else {
-				this.pane.ようこそ = true;
 			}
-			console.log(this.pane);
-			console.log(hash);
+			vueData.pane.ようこそ = true;
 		},
 		methods: {
 			fetchCharacter: function(me) {
@@ -57,7 +58,7 @@ window.addEventListener("DOMContentLoaded", function() {
 					dataType: 'xml',
 					success: function(data, textStatus) {
 						var dom = $(data);
-						app.character.desc = dom.find('#description').html();
+						app.character.desc = $('<div></div>').append(dom.find('#description').children()).html();
 						app.character.name = dom.find('title').text();
 						app.character.ruby = dom.find('#ruby').text();
 						app.character.images = [];
@@ -81,7 +82,7 @@ window.addEventListener("DOMContentLoaded", function() {
 					dataType:'xml',
 					success: function(data, textStatus) {
 						var dom = $(data);
-						app.story.desc = dom.find('#description').html();
+						app.story.desc = $('<div></div>').append(dom.find('#description').children()).html();
 						app.story.name = dom.find('title').text();
 						app.story.path = dom.find('#path').text();
 						dom
@@ -101,7 +102,7 @@ window.addEventListener("DOMContentLoaded", function() {
 					success: function(data, textStatus) {
 						var dom = $(data);
 						app.ss.name = dom.find('title').text();
-						app.ss.content = dom.find('#content').html();
+						app.ss.content = $('<div></div>').append(dom.find('#content').children()).html();
 						dom
 							.find('#characters > li')
 							.each(function(i,e) {
@@ -111,35 +112,36 @@ window.addEventListener("DOMContentLoaded", function() {
 				});
 			},
 			enlarge: function(me) {
-				const target = me.target;
-				axios({
-					method:"GET",
-					url:"image.html",
-					responseType:"document",
-				}).then(response=>{
-					const html = response.data;
-					const panel = html.getElementById("image-panel");
-					panel.style.position = "absolute";
-					const top = me.pageY - target.naturalHeight/2 > 0 ? me.pageY - target.naturalHeight/2 : 0;
-					panel.style.top = top + "px";
-					panel.style.left = 0;
-					panel.style.width = "100%";
-					panel.style.zIndex = 30;
-					const image = panel.querySelector("#image");
-					const img = document.createElement("img");
-					img.setAttribute("src", target.getAttribute("src"));
-					const width = window.innerWidth > img.naturalWidth ? img.naturalWidth : window.innerWidth;
-					img.setAttribute("width", width);
-					image.appendChild(img);
-					html.getElementById("close-button").addEventListener("click",(event)=>{
-						document.body.removeChild(panel);
-					});
-					document.body.appendChild(panel);
+				var  target = me.target;
+				$.ajax({
+					type: 'GET',
+					url: "image.html",
+					dataType: 'xml',
+					success: function(data, textStatus) {
+						
+						var  panel = data.getElementById("image-panel");
+						panel.style.position = "absolute";
+						var  top = me.pageY - target.naturalHeight/2 > 0 ? me.pageY - target.naturalHeight/2 : 0;
+						panel.style.top = top + "px";
+						panel.style.left = 0;
+						panel.style.width = "100%";
+						panel.style.zIndex = 30;
+						var  image = panel.querySelector("#image");
+						var  img = document.createElement("img");
+						img.setAttribute("src", target.getAttribute("src"));
+						var  width = window.innerWidth > img.naturalWidth ? img.naturalWidth : window.innerWidth;
+						img.setAttribute("width", width);
+						image.appendChild(img);
+						data.getElementById("close-button").addEventListener("click",function (event) {
+							document.body.removeChild(panel);
+						});
+						document.body.appendChild(panel);
+					}
 				});
 			},
 			selectTab: function(me) {
-				const target = me.target.innerText;
-				Object.keys(this.pane).forEach(prop => this.pane[prop] = false);
+				var  target = me.target.innerText;
+				Object.keys(this.pane).forEach(function (prop) {app.pane[prop] = false});
 				this.pane[target] = true;
 				this.showMenu = false;
 			},
