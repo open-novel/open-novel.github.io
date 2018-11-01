@@ -26,28 +26,34 @@ var vueData = {
 		},
 		showMenu: false
 }
+
+var  hash = document.location.hash;
+var  paneAry = Object.keys(vueData.pane);
+if(hash) {
+	var  flgmnt = decodeURI(hash.slice(1));
+	var index = -1;
+	$.each(paneAry, function(i,n) {
+		if(n === flgmnt) {
+			index = i;
+			return;
+		}
+	});
+	if(index !== -1) {
+		vueData.pane[paneAry[index]] = true;
+	} else {
+		vueData.pane.ようこそ = true;
+	}
+} else {
+	vueData.pane.ようこそ = true;
+}
+
+console.log(vueData.pane);
 window.addEventListener("DOMContentLoaded", function() {
 	var  app = new Vue({
 		el:"#app",
 		data: vueData,
 		mounted: function(){
-			var  hash = document.location.hash;
-			var  paneAry = Object.keys(this.pane);
-			Object.keys(this.pane).forEach(function(prop) {
-				vueData.pane[prop] = false
-			});
-			if(hash) {
-				var  flgmnt = decodeURI(hash.slice(1));
-				var index = -1;
-				$.each(paneAry, function(i,n) {
-					if(n === flgmnt) return n;
-				});
-				if(index != -1) {
-					this.pane[paneAry[index]] = true;
-					return;
-				}
-			}
-			vueData.pane.ようこそ = true;
+			
 		},
 		methods: {
 			fetchCharacter: function(me) {
