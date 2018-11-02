@@ -15,9 +15,9 @@
 <script src="main.js"></script>
 <script src="../Products/onp-agent.js"></script>
 <link rel="stylesheet" href="satoru.css">
-<!-- [if lt IE 9]>
+<!-- [if gt IE 11]> -->
 
-<![endif] -->
+<!-- <![endif] -->
 <link rel="stylesheet" href="main.css">
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-42847701-4"></script>
@@ -44,19 +44,19 @@
 </menu>
 </nav>
 </div>
-<div id="logo">おーぷんでエロゲ作ろうぜ</div>
+<div id="logo"><h1>おーぷんでエロゲ作ろうぜ</h1></div>
 </header>
 <main>
 <div id="main" class="tab-pane">
 <section id="ようこそ" class="pane active" v-show="pane.ようこそ">
-<h1>ようこそおーぷんでエロゲ作ろうぜのサイトへ</h1>
+<h2>ようこそおーぷんでエロゲ作ろうぜのサイトへ</h2>
 <p>「おーぷんでエロゲ作ろうぜ」はおーぷん2ちゃんねるのVIP板のスレッドで進行しているオープンソースのAVG開発プロジェクトです。</p>
 <p>このプロジェクトはそのスレッドを中心にGitHub上で開発が行われています。プロジェクトの開発の柱はプレイヤー、サイト、Wikiです。</p>
 <p>おーぷん2ちゃんねるで、パブリックドメインのアドベンチャーゲームを作ろうという企画から始まったプロジェクトです。 2013年に5月に企画がはじまりました。<br>
 SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハッシュタグでお願いします。例えばツイッターの場合です。</p>
 </section>
 <section id="システム" class="pane" v-show="pane.システム">
-<h3>システム</h3>
+<h2>システム</h2>
 <p>ウェブ上で作品インストールが可能な高機能ノベルプレイヤー</p>
 <p>クリック一つでウェブ上の作品をインストールできるお手軽ノベルプレイヤー</p>
 <p>SVG対応でアニメーションも可能</p>
@@ -64,7 +64,12 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <p>またブラウザによりコンテンツが隔離されるため、PCに悪影響を及ぼすことなく安心して第三者の作品を楽しむことができます。</p>
 </section>
 <section id="キャラクター" class="pane" v-show="pane.キャラクター">
-<h3>キャラクター</h3>
+<h2>キャラクター</h2>
+<ul>
+<li>応分</li>
+</ul>
+<section>
+<h3>応分</h3>
 <ul class="inline-items">
 <li><button v-on:click="fetchCharacter">矢野さとる</button></li>
 <li><button v-on:click="fetchCharacter">赤坂由奈</button></li>
@@ -78,7 +83,8 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <li><button v-on:click="fetchCharacter">巫女</button></li>
 <li><button v-on:click="fetchCharacter">泉岳寺龍基</button></li>
 </ul>
-<div id="character-pane">
+</section>
+<section id="character-pane">
 <section>
 <h4>名前</h4>
 <p><ruby>{{character.name}}<rt>{{character.ruby}}</rt></ruby></p>
@@ -91,12 +97,19 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <li v-for="image in character.images"><img v-on:click="enlarge" width="100" v-bind:src="'images/人物/'+character.name+'/'+image"></li>
 </ul>
 </section>
-</div>
+</section>
 </section>
 <section id="ストーリー" v-show="pane.ストーリー">
-<h3>ストーリー</h3>
+<h2>ストーリー</h2>
+<ul>
+<li>応分</li>
+<li>その他</li>
+</ul>
+<section id="ストーリー/応分">
+<h3>応分</h3>
 <p>おうぶ市</p>
-<h4>旧作・一般</h4>
+<section id="ストーリー/応分/一般">
+<h4>一般</h4>
 <ul class="inline-items">
 <li><button v-on:click="fetchStory">滅亡のバレンタイン</button></li>
 <li><button v-on:click="fetchStory">ねぇさとるくん</button></li>
@@ -104,22 +117,33 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <li><button v-on:click="fetchStory">あかね改</button></li>
 <li><button v-on:click="fetchStory">女の子に告白</button></li>
 <li><button v-on:click="fetchStory">女の子に告白2</button></li>
-<li><button v-on:click="fetchStory">デモ・基本</button></li>
-<li><button v-on:click="fetchStory">デモ・フラグ</button></li>
-</ul>
-<h4>新作・一般</h4>
-<ul class="inline-items">
 <li><button v-on:click="fetchStory">001</button></li>
-<li><button v-on:click="fetchStory">ちょっとしたプロジェクト</button></li>
 </ul>
+</section>
+<section id="ストーリー/応分/R15">
 <h4>R15(※15歳以上対象)</h4>
 <ul class="inline-items">
-<li>🚫<button v-on:click="fetchStory">ダイジェストＲ１５</button>Ｒ１５試作品</li>
+<li><button v-on:click="fetchStory">ダイジェストＲ１５</button></li>
 </ul>
+</section>
+<section id="ストーリー/応分/R18">
 <h4>R18(※18歳以上対象)</h4>
 <ul class="inline-items">
-<li>🔞<button v-on:click="fetchStory">ダイジェストＲ１８</button>Ｒ１８試作品</li>
+<li><button v-on:click="fetchStory">ダイジェストＲ１８</button></li>
 </ul>
+</section>
+</section>
+<section id="ストーリー/その他">
+<h3>その他</h3>
+<section id="ストーリー/その他/一般">
+<h4>一般</h4>
+<ul class="inline-items">
+<li><button v-on:click="fetchStory">デモ・基本</button></li>
+<li><button v-on:click="fetchStory">デモ・フラグ</button></li>
+<li><button v-on:click="fetchStory">ちょっとしたプロジェクト</button></li>
+</ul>
+</section>
+</section>
 <section>
 <h4>名前</h4>
 <p id="story-title">{{story.name}}<a v-if="story.path" v-bind:href="'../' + story.path" v-on:click="onp"> インストールする</a></p>
@@ -157,7 +181,9 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <li><a href="https://github.com/open-novel/open-novel.github.io">GitHub</a></li>
 <li><a href="https://github.com/open-novel/open-novel.github.io/wiki">Wiki</a></li>
 <li><a href="https://twitter.com/nandaka_furari">暫定ツイッター連絡先</a></li>
-<li><a href="https://sites.google.com/site/openeroge/home">旧まとめ</a></li>
+</ul>
+<ul>
+<li><a href="https://sites.google.com/site/openeroge/home">応分まとめ</a></li>
 </ul>
 </footer>
 </body>
