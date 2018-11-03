@@ -1,3 +1,4 @@
+var DEFAULT_PANES = ['ようこそ','応分'];
 var vueData = {
 		character: {
 			name:null,
@@ -12,6 +13,7 @@ var vueData = {
 			ストーリー:false,
 			ギャラリー:false
 		},
+		panes: ['ようこそ','応分'],
 		story: {
 			name:null,
 			characters:[],
@@ -28,23 +30,20 @@ var vueData = {
 }
 
 var  hash = document.location.hash;
-var  paneAry = Object.keys(vueData.pane);
+var  paneAry = ['ようこそ','システム','キャラクター','ストーリー','SS','ギャラリー'];
 if(hash) {
-	var  flgmnt = decodeURI(hash.slice(1));
+	var array = decodeURI(hash.slice(1)).split('/');
 	var index = -1;
 	$.each(paneAry, function(i,n) {
-		if(n === flgmnt) {
+		if(n === array[0]) {
 			index = i;
 			return;
 		}
 	});
+	console.log(`${index} ${paneAry}`);
 	if(index !== -1) {
-		vueData.pane[paneAry[index]] = true;
-	} else {
-		vueData.pane.ようこそ = true;
+		vueData.panes[0] = paneAry[index];
 	}
-} else {
-	vueData.pane.ようこそ = true;
 }
 
 console.log(vueData.pane);
@@ -53,6 +52,9 @@ window.addEventListener("DOMContentLoaded", function() {
 		el:"#app",
 		data: vueData,
 		mounted: function(){
+			
+		},
+		computed: {
 			
 		},
 		methods: {
@@ -147,8 +149,7 @@ window.addEventListener("DOMContentLoaded", function() {
 			},
 			selectTab: function(me) {
 				var  target = me.target.innerText;
-				Object.keys(this.pane).forEach(function (prop) {app.pane[prop] = false});
-				this.pane[target] = true;
+				this.panes[0] = target;
 				this.showMenu = false;
 			},
 			toggleMenu: function() {
