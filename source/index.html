@@ -30,24 +30,22 @@
 </script>
 </head>
 <body>
-<div id="app">
 <header>
-<div id="menu">
-<button v-on:click="toggleMenu">メニュー</button>
+<div id="menu"></div>
+<div id="logo"><h1>おーぷんでエロゲ作ろうぜ</h1></div>
+<div style="clear:both"></div>
+</header>
+<main id="app">
 <nav>
-<menu type="toolbar" id="main-menu" v-if="showMenu">
+<ul id="main-menu" v-show="showMenu">
 <li class="active"><a href="#ようこそ" v-on:click="selectTab">ようこそ</a></li>
 <li><a href="#システム" v-on:click="selectTab">システム</a></li>
 <li><a href="#キャラクター" v-on:click="selectTab">キャラクター</a></li>
 <li><a href="#ストーリー" v-on:click="selectTab">ストーリー</a></li>
 <li><a href="#SS" v-on:click="selectTab">SS</a></li>
 <li><a href="#ギャラリー" v-on:click="selectTab">ギャラリー</a></li>
-</menu>
+</ul>
 </nav>
-</div>
-<div id="logo"><h1>おーぷんでエロゲ作ろうぜ</h1></div>
-</header>
-<main>
 <div id="main" class="tab-pane">
 <section id="ようこそ" class="pane" v-show="panes[0] === 'ようこそ'">
 <h2>ようこそおーぷんでエロゲ作ろうぜのサイトへ</h2>
@@ -145,13 +143,14 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 </ul>
 </section>
 </section>
-<section>
-<h4>名前</h4>
-<p id="story-title">{{story.name}}<a v-if="story.path &amp;&amp; !window.NO_MODULE" v-bind:href="'../' + story.path" v-on:click="onp"> インストールする</a></p>
-</section>
-<section>
-<div v-html="story.desc"></div>
-</section>
+<dl>
+<dt>インストール</dt>
+<dd><a v-if="story.path &amp;&amp; !window.NO_MODULE" v-bind:href="'../' + story.path" v-on:click="onp">インストールする</a><span v-if="window.NO_MODULE">お使いのブラウザではプレイできません</span></dd>
+<dt>名前</dt>
+<dd>{{story.name}}</dd>
+<dt>解説</dt>
+<dd v-html="story.desc"></dd>
+</dl>
 </section>
 <section id="SS" class="pane" v-show="panes[0] === 'SS'">
 <h3>SS</h3>
@@ -176,7 +175,6 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 </section>
 </div>
 </main>
-</div>
 <footer>
 <ul>
 <li><a href="https://github.com/open-novel/open-novel.github.io">GitHub</a></li>

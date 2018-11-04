@@ -37,8 +37,16 @@ if(hash) {
 		vueData.panes[0] = paneAry[index];
 	}
 }
-
 window.addEventListener("DOMContentLoaded", function() {
+	$('#main-menu').css({
+		position:"fixed",
+		top:"10px",
+		left:0
+	});
+	$('<button>メニュー</button>').click(function(){
+		app.showMenu = app.showMenu ? false : true;
+		document.querySelector("#main-menu").style.display = "block";
+	}).appendTo($('#menu'));
 	var  app = new Vue({
 		el:"#app",
 		data: vueData,
@@ -142,10 +150,6 @@ window.addEventListener("DOMContentLoaded", function() {
 				var  target = me.target.innerText;
 				this.panes[0] = target;
 				this.showMenu = false;
-			},
-			toggleMenu: function() {
-				this.showMenu = this.showMenu ? false : true;
-				if(document.querySelector("#main-menu")) document.querySelector("#main-menu").style.display = "block";
 			},
 			onp: function(e) {
 				onp(e);
