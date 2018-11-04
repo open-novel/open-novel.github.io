@@ -6,13 +6,6 @@ var vueData = {
 			images:[],
 			desc:null
 		},
-		pane: {
-			ようこそ:false,
-			システム:false,
-			キャラクター:false,
-			ストーリー:false,
-			ギャラリー:false
-		},
 		panes: ['ようこそ','応分'],
 		story: {
 			name:null,
@@ -28,7 +21,7 @@ var vueData = {
 		},
 		showMenu: false
 }
-
+if(window.NO_MODULE === undefined) window.NO_MODULE = false;
 var  hash = document.location.hash;
 var  paneAry = ['ようこそ','システム','キャラクター','ストーリー','SS','ギャラリー'];
 if(hash) {
@@ -40,13 +33,11 @@ if(hash) {
 			return;
 		}
 	});
-	console.log(`${index} ${paneAry}`);
 	if(index !== -1) {
 		vueData.panes[0] = paneAry[index];
 	}
 }
 
-console.log(vueData.pane);
 window.addEventListener("DOMContentLoaded", function() {
 	var  app = new Vue({
 		el:"#app",
