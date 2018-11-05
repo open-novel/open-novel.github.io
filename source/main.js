@@ -120,30 +120,21 @@ window.addEventListener("DOMContentLoaded", function() {
 			},
 			enlarge: function(me) {
 				var  target = me.target;
-				$.ajax({
-					type: 'GET',
-					url: "image.html",
-					dataType: 'xml',
-					success: function(data, textStatus) {
-						
-						var  panel = data.getElementById("image-panel");
-						panel.style.position = "absolute";
-						var  top = me.pageY - target.naturalHeight/2 > 0 ? me.pageY - target.naturalHeight/2 : 0;
-						panel.style.top = top + "px";
-						panel.style.left = 0;
-						panel.style.width = "100%";
-						panel.style.zIndex = 30;
-						var  image = panel.querySelector("#image");
-						var  img = document.createElement("img");
-						img.setAttribute("src", target.getAttribute("src"));
-						var  width = window.innerWidth > img.naturalWidth ? img.naturalWidth : window.innerWidth;
-						img.setAttribute("width", width);
-						image.appendChild(img);
-						data.getElementById("close-button").addEventListener("click",function (event) {
-							document.body.removeChild(panel);
-						});
-						document.body.appendChild(panel);
-					}
+				var  top = me.pageY - target.naturalHeight/2 > 0 ? me.pageY - target.naturalHeight/2 : 0;
+				$('body').append('<div id="image-panel"><div id="image"></div><div><button id="close-button">閉じる</butto></div></div>');
+				var panel = $('#image-panel').css({
+					position: 'absolute',
+					top: top,
+					width: '100%',
+					"z-index": 30
+				});
+				var  width = window.innerWidth > me.target.naturalWidth ? me.target.naturalWidth : window.innerWidth;
+				$('<img>').attr({
+					src: target.getAttribute("src"),
+					width: width
+				}).appendTo($('#image'));
+				panel.find('#close-button').click(function() {
+					$('#image-panel').remove();
 				});
 			},
 			selectTab: function(me) {
