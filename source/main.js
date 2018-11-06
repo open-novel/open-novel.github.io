@@ -6,7 +6,8 @@ var vueData = {
 			images:[],
 			desc:null
 		},
-		panes: ['ようこそ','応分'],
+		panes: ['ようこそ'],
+		pane: '',
 		story: {
 			name:null,
 			characters:[],
@@ -26,13 +27,14 @@ var  hash = document.location.hash;
 var  paneAry = ['ようこそ','システム','キャラクター','ストーリー','SS','ギャラリー'];
 if(hash) {
 	var array = decodeURI(hash.slice(1)).split('/');
+	vueData.panes = array;
 	var index = -1;
 	$.each(paneAry, function(i,n) {
 		if(n === array[0]) {
 			index = i;
 			return;
 		}
-	});
+	});                                  
 	if(index !== -1) {
 		vueData.panes[0] = paneAry[index];
 	}
@@ -142,9 +144,9 @@ window.addEventListener("DOMContentLoaded", function() {
 					)
 				);
 			},
-			selectTab: function(me) {
-				var  target = me.target.innerText;
-				this.panes[0] = target;
+			selectTab: function(index, me) {
+				this.panes[index] = me.target.innerText;
+				this.pane = me.target.innerText;
 				this.showMenu = false;
 			},
 			onp: function(e) {

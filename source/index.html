@@ -36,14 +36,15 @@
 <div style="clear:both"></div>
 </header>
 <main id="app">
+{{pane}}
 <nav>
 <ul id="main-menu" v-show="showMenu">
-<li class="active"><a href="#ようこそ" v-on:click="selectTab">ようこそ</a></li>
-<li><a href="#システム" v-on:click="selectTab">システム</a></li>
-<li><a href="#キャラクター" v-on:click="selectTab">キャラクター</a></li>
-<li><a href="#ストーリー" v-on:click="selectTab">ストーリー</a></li>
-<li><a href="#SS" v-on:click="selectTab">SS</a></li>
-<li><a href="#ギャラリー" v-on:click="selectTab">ギャラリー</a></li>
+<li class="active"><a href="#ようこそ" v-on:click="selectTab(0, $event)">ようこそ</a></li>
+<li><a href="#システム" v-on:click="selectTab(0, $event)">システム</a></li>
+<li><a href="#キャラクター" v-on:click="selectTab(0, $event)">キャラクター</a></li>
+<li><a href="#ストーリー" v-on:click="selectTab(0, $event)">ストーリー</a></li>
+<li><a href="#SS" v-on:click="selectTab(0, $event)">SS</a></li>
+<li><a href="#ギャラリー" v-on:click="selectTab(0, $event)">ギャラリー</a></li>
 </ul>
 </nav>
 <div id="main" class="tab-pane">
@@ -101,10 +102,10 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <section id="ストーリー" class="pane" v-show="panes[0] === 'ストーリー'">
 <h2>ストーリー</h2>
 <ul class="inline-items">
-<li>応分</li>
-<li>その他</li>
+<li><a href="#ストーリー/応分" v-on:click="selectTab(1, $event)">応分</a></li>
+<li><a href="#ストーリー/その他" v-on:click="selectTab(1, $event)">その他</a></li>
 </ul>
-<section id="ストーリー/応分">
+<section id="ストーリー/応分" v-show="panes[1] === '応分'">
 <h3>応分</h3>
 <p>おうぶ市</p>
 <section id="ストーリー/応分/一般">
@@ -132,7 +133,7 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 </ul>
 </section>
 </section>
-<section id="ストーリー/その他">
+<section id="ストーリー/その他" v-show="panes[1] === 'その他'">
 <h3>その他</h3>
 <section id="ストーリー/その他/一般">
 <h4>一般</h4>
