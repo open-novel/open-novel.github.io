@@ -121,21 +121,26 @@ window.addEventListener("DOMContentLoaded", function() {
 			enlarge: function(me) {
 				var  target = me.target;
 				var  top = me.pageY - target.naturalHeight/2 > 0 ? me.pageY - target.naturalHeight/2 : 0;
-				$('body').append('<div id="image-panel"><div id="image"></div><div><button id="close-button">閉じる</butto></div></div>');
-				var panel = $('#image-panel').css({
-					position: 'absolute',
-					top: top,
-					width: '100%',
-					"z-index": 30
-				});
 				var  width = window.innerWidth > me.target.naturalWidth ? me.target.naturalWidth : window.innerWidth;
-				$('<img>').attr({
-					src: target.getAttribute("src"),
-					width: width
-				}).appendTo($('#image'));
-				panel.find('#close-button').click(function() {
-					$('#image-panel').remove();
-				});
+				$('body')
+				.append(
+					$('<div id="image-panel"></div>')
+					.css({
+						position: 'absolute',
+						top: top,
+						width: '100%',
+						"z-index": 30
+					}).append($('<div id="image"></div>')
+						.append($('<img>').attr({
+							src: target.getAttribute("src"),
+							width: width
+						}))
+					).append($('<button id="close-button">閉じる</button>')
+						.click(function() {
+							$('#image-panel').remove();
+						})
+					)
+				);
 			},
 			selectTab: function(me) {
 				var  target = me.target.innerText;
