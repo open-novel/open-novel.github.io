@@ -146,6 +146,7 @@ window.addEventListener("DOMContentLoaded", function() {
 			},
 			selectTab: function(index, me) {
 				this.panes[index] = me.target.innerText;
+				//再描画に必要
 				this.pane = me.target.innerText;
 				this.showMenu = false;
 			},
