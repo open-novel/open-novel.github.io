@@ -106,32 +106,22 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <li><a href="#ストーリー/応分" v-on:click="selectTab(1, $event)">応分</a></li>
 <li><a href="#ストーリー/その他" v-on:click="selectTab(1, $event)">その他</a></li>
 </ul>
+<p>🚫:R15(※15歳以上対象 )🔞: R18(※18歳以上対象)</p>
 <section id="ストーリー/応分" v-show="panes[1] === '応分'">
 <h3>応分</h3>
 <p>応分市の応分高校を舞台にした物語</p>
 <section>
 <h4>一般</h4>
-<ul class="inline-items">
-<li><button v-on:click="fetchStory">滅亡のバレンタイン</button></li>
-<li><button v-on:click="fetchStory">ねぇさとるくん</button></li>
-<li><button v-on:click="fetchStory">openメモリアル</button></li>
-<li><button v-on:click="fetchStory">あかね改</button></li>
-<li><button v-on:click="fetchStory">女の子に告白</button></li>
-<li><button v-on:click="fetchStory">女の子に告白2</button></li>
-<li><button v-on:click="fetchStory">001</button></li>
-</ul>
-</section>
-<section>
-<h4>R15(※15歳以上対象)</h4>
-<ul class="inline-items">
-<li><button v-on:click="fetchStory">ダイジェストＲ１５</button></li>
-</ul>
-</section>
-<section>
-<h4>R18(※18歳以上対象)</h4>
-<ul class="inline-items">
-<li><button v-on:click="fetchStory">ダイジェストＲ１８</button></li>
-</ul>
+<table>
+<tr><td><button v-on:click="fetchStory">滅亡のバレンタイン</button></td><td><img width="100" src="/Products/あかね改/背景/サムネイル.png" alt="教室のあかね"></td><td>突然爆弾を渡されて？</td><td>インストール</td></tr>
+<tr><td><button v-on:click="fetchStory">ねぇさとるくん</button></td><td><img width="100" src="/Products/ねぇさとるくん/背景/サムネイル.png" alt="教室の幽霊"></td></tr>
+<tr><td><button v-on:click="fetchStory">openメモリアル</button></td><td><img width="100" src="/Products/openメモリアル/背景/サムネイル.png" alt="クリスマスツリー"></td></tr>
+<tr><td><button v-on:click="fetchStory">あかね改</button></td><td><img width="100" src="/Products/あかね改/背景/サムネイル.png" alt="あかね"></td></tr>
+<tr><td><button v-on:click="fetchStory">女の子に告白</button></td><td><img width="100" src="/Products/女の子に告白/背景/サムネイル.png" alt="教室のあかね"></td></tr>
+<tr><td><button v-on:click="fetchStory">女の子に告白2</button></td><td><img width="100" src="/Products/女の子に告白2/背景/サムネイル.png" alt="路上のさとる"></td></tr>
+<tr><td>🚫<button class="r15" v-on:click="fetchStory">ダイジェストＲ１５</button></td><td></td></tr>
+<tr><td>🔞<button v-on:click="fetchStory">ダイジェストＲ１８</button></td><td></td></tr>
+</table>
 </section>
 </section>
 <section id="ストーリー/その他" v-show="panes[1] === 'その他'">
