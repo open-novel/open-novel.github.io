@@ -6,7 +6,7 @@ var vueData = {
 			images:[],
 			desc:null
 		},
-		panes: ['ようこそ'],
+		panes: ['ようこそ','応分'],
 		pane: '',
 		story: {
 			name:null,
@@ -27,7 +27,9 @@ var  hash = document.location.hash;
 var  paneAry = ['ようこそ','システム','キャラクター','ストーリー','SS','ギャラリー'];
 if(hash) {
 	var array = decodeURI(hash.slice(1)).split('/');
-	vueData.panes = array;
+	for(var i = 0; i < array.length; i++) {
+		vueData.panes[i] = array[i];
+	}
 	var index = -1;
 	$.each(paneAry, function(i,n) {
 		if(n === array[0]) {
