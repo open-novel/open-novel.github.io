@@ -15,9 +15,9 @@ self.addEventListener( 'fetch', e => {
 				return res.clone( )
 			} )
 
-		let list = [ 'manifest', 'document', 'serviceworker' ]
+		let list = [ 'audio', 'font', 'image', 'style', 'video' ]
 
-		if ( req.mode == 'navigate' || list.includes( req.destination ) || req.url.includes( '/Player' ) ) {
+		if ( req.mode == 'navigate' || ! list.includes( req.destination ) || req.url.includes( '/Player' ) ) {
 			e.respondWith( network.catch( ( ) => caches.match( req ) ) )
 		} else {
 			e.respondWith( caches.match( req ).then( v => v || network ) )
