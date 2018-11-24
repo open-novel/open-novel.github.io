@@ -22,6 +22,9 @@ var vueData = {
 		},
 		showMenu: false
 }
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('/service-worker.js');
+}
 if(window.NO_MODULE === undefined) window.NO_MODULE = false;
 var  hash = document.location.hash;
 var  paneAry = ['ようこそ','システム','キャラクター','ストーリー','SS','ギャラリー'];
@@ -101,6 +104,7 @@ window.addEventListener("DOMContentLoaded", function() {
 							.each(function(i,e) {
 								app.story.characters.push(e.textContent);
 							});
+						location.href = '#story-description';
 					}
 				});
 			},

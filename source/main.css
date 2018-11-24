@@ -52,5 +52,15 @@ footer {
 	}
 	#SS pre {
 		white-space: pre-wrap;
+	}
 }
+@media screen and (min-width: 480px) {
+	.stories {
+		float:left;
+		width:50%;
+	}
+	#story-description {
+		float:left;
+		width:50%;
+	}
 }

@@ -106,8 +106,13 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <li><a href="#ストーリー/応分" v-on:click="selectTab(1, $event)">応分</a></li>
 <li><a href="#ストーリー/その他" v-on:click="selectTab(1, $event)">その他</a></li>
 </ul>
-<p>🚫:R15(※15歳以上対象 )🔞: R18(※18歳以上対象)</p>
-<section id="ストーリー/応分" v-show="panes[1] === '応分'">
+<dl class="inline-items">
+<dt>🚫</dt>
+<dd>R15(※15歳以上対象)</dd>
+<dt>🔞</dt>
+<dd>R18(※18歳以上対象)</dd>
+</dl>
+<section id="ストーリー/応分" class="stories" v-show="panes[1] === '応分'">
 <h3>応分</h3>
 <p>応分市の応分高校を舞台にした物語</p>
 <section>
@@ -124,7 +129,7 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 </table>
 </section>
 </section>
-<section id="ストーリー/その他" v-show="panes[1] === 'その他'">
+<section id="ストーリー/その他" class="stories" v-show="panes[1] === 'その他'">
 <h3>その他</h3>
 <section>
 <h4>一般</h4>
@@ -135,7 +140,7 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 </ul>
 </section>
 </section>
-<dl>
+<dl id="story-description">
 <dt>インストール</dt>
 <dd><a v-if="story.path &amp;&amp; !window.NO_MODULE" v-bind:href="'../' + story.path" v-on:click="onp">インストールする</a><span v-if="window.NO_MODULE">お使いのブラウザではプレイできません</span></dd>
 <dt>名前</dt>
@@ -143,6 +148,7 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <dt>解説</dt>
 <dd v-html="story.desc"></dd>
 </dl>
+<div style="clear:both"></div>
 </section>
 <section id="SS" class="pane" v-show="panes[0] === 'SS'">
 <h3>SS</h3>
