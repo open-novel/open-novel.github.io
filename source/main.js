@@ -23,7 +23,7 @@ var vueData = {
 		showMenu: false
 }
 if ('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('/service-worker.js');
+	navigator.serviceWorker.register('./service-worker.js');
 }
 if(window.NO_MODULE === undefined) window.NO_MODULE = false;
 var  hash = document.location.hash;
