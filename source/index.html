@@ -10,7 +10,6 @@
 <meta property="og:description" content="オープンソースなエロゲを作るプロジェクトです。">
 <meta name="twitter:card" content="summary_large_image">
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script nomodule>window.NO_MODULE = true;</script>
 <script src="main.js"></script>
@@ -115,30 +114,24 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <section id="ストーリー/応分" class="stories" v-show="panes[1] === '応分'">
 <h3>応分</h3>
 <p>応分市の応分高校を舞台にした物語</p>
-<section>
-<h4>一般</h4>
 <table>
-<tr><td><button v-on:click="fetchStory">滅亡のバレンタイン</button></td><td><img width="100" src="/Products/あかね改/背景/サムネイル.png" alt="教室のあかね"></td></tr>
-<tr><td><button v-on:click="fetchStory">ねぇさとるくん</button></td><td><img width="100" src="/Products/ねぇさとるくん/背景/サムネイル.png" alt="教室の幽霊"></td></tr>
-<tr><td><button v-on:click="fetchStory">openメモリアル</button></td><td><img width="100" src="/Products/openメモリアル/背景/サムネイル.png" alt="クリスマスツリー"></td></tr>
-<tr><td><button v-on:click="fetchStory">あかね改</button></td><td><img width="100" src="/Products/あかね改/背景/サムネイル.png" alt="あかね"></td></tr>
-<tr><td><button v-on:click="fetchStory">女の子に告白</button></td><td><img width="100" src="/Products/女の子に告白/背景/サムネイル.png" alt="教室のあかね"></td></tr>
-<tr><td><button v-on:click="fetchStory">女の子に告白2</button></td><td><img width="100" src="/Products/女の子に告白2/背景/サムネイル.png" alt="路上のさとる"></td></tr>
-<tr><td>🚫<button class="r15" v-on:click="fetchStory">ダイジェストＲ１５</button></td><td></td></tr>
-<tr><td>🔞<button v-on:click="fetchStory">ダイジェストＲ１８</button></td><td></td></tr>
+<tr><td><input type="checkbox"></td><td><button v-on:click="fetchStory">滅亡のバレンタイン</button></td><td><img width="100" src="/Products/あかね改/背景/サムネイル.png" alt="教室のあかね"></td></tr>
+<tr><td><input type="checkbox"></td><td><button v-on:click="fetchStory">ねぇさとるくん</button></td><td><img width="100" src="/Products/ねぇさとるくん/背景/サムネイル.png" alt="教室の幽霊"></td><td></td></tr>
+<tr><td><input type="checkbox"></td><td><button v-on:click="fetchStory">openメモリアル</button></td><td><img width="100" src="/Products/openメモリアル/背景/サムネイル.png" alt="クリスマスツリー"></td></tr>
+<tr><td><input type="checkbox"></td><td><button v-on:click="fetchStory">あかね改</button></td><td><img width="100" src="/Products/あかね改/背景/サムネイル.png" alt="あかね"></td></tr>
+<tr><td><input type="checkbox"></td><td><button v-on:click="fetchStory">女の子に告白</button></td><td><img width="100" src="/Products/女の子に告白/背景/サムネイル.png" alt="教室のあかね"></td></tr>
+<tr><td><input type="checkbox"></td><td><button v-on:click="fetchStory">女の子に告白2</button></td><td><img width="100" src="/Products/女の子に告白2/背景/サムネイル.png" alt="路上のさとる"></td></tr>
+<tr><td><input type="checkbox"></td><td>🚫<button class="r15" v-on:click="fetchStory">ダイジェストＲ１５</button></td><td></td></tr>
+<tr><td><input type="checkbox"></td><td>🔞<button v-on:click="fetchStory">ダイジェストＲ１８</button></td><td></td></tr>
 </table>
-</section>
 </section>
 <section id="ストーリー/その他" class="stories" v-show="panes[1] === 'その他'">
 <h3>その他</h3>
-<section>
-<h4>一般</h4>
 <ul class="inline-items">
 <li><button v-on:click="fetchStory">デモ・基本</button></li>
 <li><button v-on:click="fetchStory">デモ・フラグ</button></li>
 <li><button v-on:click="fetchStory">ちょっとしたプロジェクト</button></li>
 </ul>
-</section>
 </section>
 <dl id="story-description">
 <dt>インストール</dt>
