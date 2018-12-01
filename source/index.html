@@ -136,7 +136,11 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 </section>
 <dl id="story-description">
 <dt>インストール</dt>
-<dd><a v-if="!window.NO_MODULE" v-bind:href="'../' + story.path" v-on:click="onp">インストールする</a><span v-if="window.NO_MODULE">お使いのブラウザではプレイできません</span></dd>
+<dd>
+<span v-if="!story.path"></span>
+<a v-else-if="!window.NO_MODULE" v-bind:href="'../' + story.path" v-on:click="onp">インストールする</a></span>
+<span v-else>お使いのブラウザではプレイできません</span>
+</dd>
 <dt>名前</dt>
 <dd>{{story.name}}</dd>
 <dt>解説</dt>
