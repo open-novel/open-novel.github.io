@@ -77,10 +77,10 @@ window.addEventListener("DOMContentLoaded", function() {
 						app.character.ruby = dom.find('#ruby').text();
 						app.character.images = [];
 						dom
-							.find('#images > li')
-							.each(function(i,e) {
-								app.character.images.push(e.textContent);
-							});
+						.find('#images > li')
+						.each(function(i,e) {
+							app.character.images.push(e.textContent);
+						});
 					},
 					error: function(data, textStatus) {
 						console.log('error');
@@ -100,10 +100,10 @@ window.addEventListener("DOMContentLoaded", function() {
 						app.story.name = dom.find('title').text();
 						app.story.path = dom.find('#path').text();
 						dom
-							.find('#characters > li')
-							.each(function(i,e) {
-								app.story.characters.push(e.textContent);
-							});
+						.find('#characters > li')
+						.each(function(i,e) {
+							app.story.characters.push(e.textContent);
+						});
 						location.href = '#story-description';
 					}
 				});
@@ -119,10 +119,10 @@ window.addEventListener("DOMContentLoaded", function() {
 						app.ss.name = dom.find('title').text();
 						app.ss.content = $('<div></div>').append(dom.find('#content').children()).html();
 						dom
-							.find('#characters > li')
-							.each(function(i,e) {
-								app.story.characters.push(e.textContent);
-							});
+						.find('#characters > li')
+						.each(function(i,e) {
+							app.story.characters.push(e.textContent);
+						});
 					}
 				});
 			},
