@@ -18,10 +18,18 @@ header {
 .inline-items > li {
 	margin:0;
 	display:inline;
-
 }
 .active {
 	outline:gray;
+}
+.compact-dl dt,dd {
+	display: inline;
+}
+.compact-dl dt:after {
+	content: ':';
+}
+.compact-dl dd {
+	margin-left:0;
 }
 footer {
 	background-color: silver;
