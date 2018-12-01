@@ -14,6 +14,7 @@
 <script nomodule>window.NO_MODULE = true;</script>
 <script src="main.js"></script>
 <script src="../Products/onp-agent.js"></script>
+<link rel="manifest" href="/Player/マニフェスト.json">
 <link rel="stylesheet" href="satoru.css">
 <!-- [if gt IE 11]> -->
 
@@ -115,14 +116,14 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 <h3>応分</h3>
 <p>応分市の応分高校を舞台にした物語</p>
 <table>
-<tr><td><input type="checkbox"></td><td><button v-on:click="fetchStory">滅亡のバレンタイン</button></td><td><img width="100" src="/Products/あかね改/背景/サムネイル.png" alt="教室のあかね"></td></tr>
-<tr><td><input type="checkbox"></td><td><button v-on:click="fetchStory">ねぇさとるくん</button></td><td><img width="100" src="/Products/ねぇさとるくん/背景/サムネイル.png" alt="教室の幽霊"></td><td></td></tr>
-<tr><td><input type="checkbox"></td><td><button v-on:click="fetchStory">openメモリアル</button></td><td><img width="100" src="/Products/openメモリアル/背景/サムネイル.png" alt="クリスマスツリー"></td></tr>
-<tr><td><input type="checkbox"></td><td><button v-on:click="fetchStory">あかね改</button></td><td><img width="100" src="/Products/あかね改/背景/サムネイル.png" alt="あかね"></td></tr>
-<tr><td><input type="checkbox"></td><td><button v-on:click="fetchStory">女の子に告白</button></td><td><img width="100" src="/Products/女の子に告白/背景/サムネイル.png" alt="教室のあかね"></td></tr>
-<tr><td><input type="checkbox"></td><td><button v-on:click="fetchStory">女の子に告白2</button></td><td><img width="100" src="/Products/女の子に告白2/背景/サムネイル.png" alt="路上のさとる"></td></tr>
-<tr><td><input type="checkbox"></td><td>🚫<button class="r15" v-on:click="fetchStory">ダイジェストＲ１５</button></td><td></td></tr>
-<tr><td><input type="checkbox"></td><td>🔞<button v-on:click="fetchStory">ダイジェストＲ１８</button></td><td></td></tr>
+<tr><td><button v-on:click="fetchStory">滅亡のバレンタイン</button></td><td><img width="100" src="/Products/あかね改/背景/サムネイル.png" alt="教室のあかね"></td></tr>
+<tr><td><button v-on:click="fetchStory">ねぇさとるくん</button></td><td><img width="100" src="/Products/ねぇさとるくん/背景/サムネイル.png" alt="教室の幽霊"></td><td></td></tr>
+<tr><td><button v-on:click="fetchStory">openメモリアル</button></td><td><img width="100" src="/Products/openメモリアル/背景/サムネイル.png" alt="クリスマスツリー"></td></tr>
+<tr><td><button v-on:click="fetchStory">あかね改</button></td><td><img width="100" src="/Products/あかね改/背景/サムネイル.png" alt="あかね"></td></tr>
+<tr><td><button v-on:click="fetchStory">女の子に告白</button></td><td><img width="100" src="/Products/女の子に告白/背景/サムネイル.png" alt="教室のあかね"></td></tr>
+<tr><td><button v-on:click="fetchStory">女の子に告白2</button></td><td><img width="100" src="/Products/女の子に告白2/背景/サムネイル.png" alt="路上のさとる"></td></tr>
+<tr><td>🚫<button class="r15" v-on:click="fetchStory">ダイジェストＲ１５</button></td><td></td></tr>
+<tr><td>🔞<button v-on:click="fetchStory">ダイジェストＲ１８</button></td><td></td></tr>
 </table>
 </section>
 <section id="ストーリー/その他" class="stories" v-show="panes[1] === 'その他'">
@@ -135,7 +136,7 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 </section>
 <dl id="story-description">
 <dt>インストール</dt>
-<dd><a v-if="story.path &amp;&amp; !window.NO_MODULE" v-bind:href="'../' + story.path" v-on:click="onp">インストールする</a><span v-if="window.NO_MODULE">お使いのブラウザではプレイできません</span></dd>
+<dd><a v-if="!window.NO_MODULE" v-bind:href="'../' + story.path" v-on:click="onp">インストールする</a><span v-if="window.NO_MODULE">お使いのブラウザではプレイできません</span></dd>
 <dt>名前</dt>
 <dd>{{story.name}}</dd>
 <dt>解説</dt>
