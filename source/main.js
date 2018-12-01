@@ -30,18 +30,18 @@ var  hash = document.location.hash;
 var  paneAry = ['ようこそ','システム','キャラクター','ストーリー','SS','ギャラリー'];
 if(hash) {
 	var array = decodeURI(hash.slice(1)).split('/');
-	for(var i = 0; i < array.length; i++) {
-		vueData.panes[i] = array[i];
-	}
 	var index = -1;
 	$.each(paneAry, function(i,n) {
 		if(n === array[0]) {
 			index = i;
 			return;
 		}
-	});                                  
+	});
 	if(index !== -1) {
 		vueData.panes[0] = paneAry[index];
+		for(var i = 0; i < array.length; i++) {
+			vueData.panes[i] = array[i];
+		}
 	}
 }
 window.addEventListener("DOMContentLoaded", function() {
