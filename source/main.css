@@ -22,7 +22,7 @@ header {
 .active {
 	outline:gray;
 }
-.compact-dl dt,dd {
+.compact-dl dt,.compact-dl dd {
 	display: inline;
 }
 .compact-dl dt:after {
