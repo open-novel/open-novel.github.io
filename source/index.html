@@ -12,8 +12,9 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script nomodule>window.NO_MODULE = true;</script>
+<script src="https://open-novel.github.io/tools/onp-messenger.js"></script>
 <script src="main.js"></script>
-<script src="../Products/onp-agent.js"></script>
+<script src="../tools/onp-agent.js"></script>
 <link rel="manifest" href="/Player/マニフェスト.json">
 <link rel="stylesheet" href="satoru.css">
 <!-- [if gt IE 11]> -->
@@ -33,6 +34,7 @@
 <header>
 <div id="menu"></div>
 <div id="logo"><h1>おーぷんでエロゲ作ろうぜ</h1></div>
+<div id="onp-desc"></div>
 <div style="clear:both"></div>
 </header>
 <main id="app">
@@ -135,17 +137,16 @@ SNSで話題にするときは「おーぷんでエロゲ作ろうぜ」のハ�
 </ul>
 </section>
 <dl id="story-description">
-<dt>インストール</dt>
-<dd>
-<span v-if="!story.path"></span>
-<a v-else-if="!window.NO_MODULE" v-bind:href="'../' + story.path" v-on:click="onp">インストールする</a></span>
-<span v-else>お使いのブラウザではプレイできません</span>
-</dd>
+
 <dt>名前</dt>
 <dd>{{story.name}}</dd>
 <dt>解説</dt>
 <dd v-html="story.desc"></dd>
 </dl>
+<div v-if="!window.NO_MODULE">
+<span v-if="!story.path"></span>
+<a v-bind:href="'../' + story.path" v-on:click="onp">インストールする</a></span>
+</div>
 <div style="clear:both"></div>
 </section>
 <section id="SS" class="pane" v-show="panes[0] === 'SS'">
