@@ -3,9 +3,9 @@ These codes are licensed under CC0.
 http://creativecommons.org/publicdomain/zero/1.0
 */
 
-{
+;( () => { 'use strict'
 
-const version = '6.1'
+const version = '6.2'
 
 window.addEventListener( 'DOMContentLoaded', ( ) => setTimeout( init, 1 ) )
 
@@ -132,4 +132,4 @@ async function getFile ( data, url ) {
 
 window.onp = onp
 
-}
+} )( );
