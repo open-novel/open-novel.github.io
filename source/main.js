@@ -1,3 +1,6 @@
+/**
+ES5
+*/
 var DEFAULT_PANES = ['ようこそ','応分'];
 var vueData = {
 		character: {
@@ -25,7 +28,6 @@ var vueData = {
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('./service-worker.js');
 }
-if(window.NO_MODULE === undefined) window.NO_MODULE = false;
 var  hash = document.location.hash;
 var  paneAry = ['ようこそ','システム','キャラクター','ストーリー','SS','ギャラリー'];
 if(hash) {
@@ -155,9 +157,6 @@ window.addEventListener("DOMContentLoaded", function() {
 				//再描画に必要
 				this.pane = me.target.innerText;
 				this.showMenu = false;
-			},
-			onp: function(e) {
-				onp(e);
 			}
 		},
 	});
