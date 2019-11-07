@@ -1,8 +1,22 @@
-おーぷんでエロゲ作ろうぜ
+おーぷんでノベルゲー作ろうぜ
 ---
 このリポジトリではPWAのノベルゲームプレイヤーの[エントリポイント](https://open-novel.github.io/)と、[ホームページ](https://open-novel.github.io/source/)のコードを収めています。
 
-このプロジェクトはおーぷんなエロゲ製作を目指しています。詳しくはWikiで。
+このプロジェクトはオープンソースのノベルゲームシステムを目指しています。詳しくはWikiで。
+
+またこのシステムで動くおーぷんなノベルゲー製作を目指すプロジェクトも含みます。
+
+## ローカルサーバの立て方
+ターゲットディレクトリを$hogeとする  
+https://github.com/open-novel/open-novel.github.io.git を $hoge/open-novel.github.io にクローン  
+https://github.com/open-novel/tools.git を $hoge/open-novel.github.io/tools にクローン  
+カレントディレクトリを $hoge/open-novel.github.io/tools にして
+
+```
+npm run server
+```
+
+をコマンドする。
 
 ## 技術
 PWAを使っています。
