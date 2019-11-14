@@ -11,6 +11,7 @@ self.addEventListener( 'fetch', e => {
 
 		let network = fetch( req, req.mode == 'navigate' ? undefined : { cache: 'no-store' } )
 			.then( res => {
+				if ( res.method != 'GET' ) return res
 				caches.open('v1').then( cache => cache.put( req, res ) )
 				return res.clone( )
 			} )
