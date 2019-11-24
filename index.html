@@ -20,14 +20,14 @@ http://creativecommons.org/publicdomain/zero/1.0
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="icon" type="image/png" href="/Player/画像/アイコン192.png">
-<link rel="manifest" href="/Player/マニフェスト.json">
+<link rel="icon" type="image/png" href="/画像/アイコン192.png">
+<link rel="manifest" href="マニフェスト.json">
 
 <title>openノベルプレーヤー</title>
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="openノベルプレーヤー">
-<meta property="og:image" content="https://open-novel.github.io/Player/画像/サムネイル.png">
+<meta property="og:image" content="https://open-novel.github.io/画像/サムネイル.png">
 <meta property="og:description" content="ブラウザ上でノベルゲームを再生するためのパブリックドメインなプレイヤーです。">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -46,7 +46,9 @@ body { background-color: black; color: white; }
 </style>
 
 <script nomodule> alert( '※お使いの実行環境は本プレイヤーに対応しておりません※\n\n※モダンブラウザ最新版をお使い下さい※' ) </script>
-<script type="module" src="/プログラム/メイン.js"></script>
-<script type="module" src="/Player/プログラム/メイン.js"></script>
+<script type="module">
+navigator.serviceWorker.register( `/サービス.js?t=${ Date.now( ) }` )
+import( `/Player{ localStorage.playerChannel == 'Dev' ? '_Dev' : '' }/プログラム/メイン.js` )
+</script>
 
 <div id="ONPWrapper"><span class=fadein><br>設定変更後起動できなくなった場合は<br><a href="javascript:localStorage.clear();location.reload()">設定リセット</a>をお試しください</span></div>

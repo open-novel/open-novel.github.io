@@ -1,0 +1,44 @@
+{
+	"short_name": "ONP",
+	"name": "openノベルプレイヤー",
+	"description": "ブラウザ上でノベルゲームを再生するためのパブリックドメインなプレイヤーです。",
+	"display": "fullscreen",
+	"orientation": "landscape",
+	"start_url": "/",
+	"background_color": "rgb(100,100,255)",
+	"theme_color": "rgb(100,100,255)",
+	"icons": [
+		{
+			"src": "/画像/アイコン333.png",
+			"sizes": "333x333",
+			"type": "image/png"
+		},
+		{
+			"src": "/画像/アイコン256.png",
+			"sizes": "256x256",
+			"type": "image/png"
+		},
+		{
+ 			"src": "/画像/アイコン192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "/画像/アイコン144.png",
+			"sizes": "144x144",
+			"type": "image/png"
+		}
+	],
+	"serviceworker": {
+		"src": "/サービス.js",
+		"scope": "/",
+		"update_via_cache": "none"
+	},
+	"screenshots": [
+		{
+			"src": "/画像/サムネイル.png",
+			"sizes": "1200x675",
+			"type": "image/png"
+		}
+	]
+}
